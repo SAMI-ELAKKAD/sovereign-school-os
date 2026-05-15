@@ -1,130 +1,145 @@
-# AIID Hackathon 2025 - AI-Explorers Documentation Website
+# Sovereign School OS
 
-A comprehensive documentation website built for the AIID Hackathon 2025, showcasing our team's collaboration, development processes, and project outcomes. This platform serves as a centralized hub for presenting our hackathon projects, team profiles, and a technical tutorial based on our experience.
+> AI-native operating system for K-12 schools. Privacy-first (browser-only, localStorage), multi-portal (student / teacher / administration), with adaptive AI Hero mentors, one-click content factory, and equity dashboards.
 
-**[🚀 View the Live Website](https://aiid-hackathon-group-documentation-438148500299.us-west1.run.app/#/project1)**
+[![Status](https://img.shields.io/badge/status-live-brightgreen)]() [![Stack](https://img.shields.io/badge/stack-React%2019%20%2B%20TS%20%2B%20Vite-blue)]() [![Privacy](https://img.shields.io/badge/data-localStorage--only-orange)]() [![Award](https://img.shields.io/badge/Winner-Tsinghua%20AIID%202025-yellow)]()
 
-## 🏆 Key Features & Documentation Philosophy
+---
 
-To win the "Best Documentation Award," a website must do more than just present information—it must teach, inspire, and tell a compelling story. We built this site around a core philosophy of making complex ideas accessible and engaging.
+## Why this exists
 
--   🌌 **Immersive & Interactive UI**: Go beyond static pages. Our site features a dynamic, GPU-accelerated constellation background, responsive aurora effects, and 3D-tilting glassmorphic cards that react to your cursor. This creates a deeply engaging and futuristic user experience that makes exploring our documentation a memorable journey.
--   🧠 **Interactive Technical Storytelling**: We believe in showing, not just telling. Complex concepts are brought to life with interactive visualizations. Our flagship project's system architecture diagram is a fully clickable navigation tool, seamlessly connecting high-level design to in-depth feature explanations.
--   🚀 **Live Vibe Coding Playground**: Our tutorial is a hands-on learning experience. We've embedded an interactive "Vibe Coding" playground where you can describe a UI in plain English and watch the AI generate code in real-time. This isn't just a tutorial; it's a demonstration of our core development philosophy.
--   🌐 **Comprehensive Journey-Oriented Content**: This website tells the complete story of our hackathon. We've meticulously documented everything from our developer journal and a visual progress tracker to a detailed glossary and a showcase of our global community engagement, providing a transparent, holistic view of our process.
--   ⚡ **Rapid & Accessible Navigation**: We value your time. The entire site is navigable via a fast, keyboard-driven command palette (accessible with `⌘K`), allowing for instant access to any page and ensuring a seamless experience for all users.
--   🛠️ **Clean & Scalable Architecture**: Built with React, TypeScript, and Framer Motion, the site's foundation is as robust as its UI is beautiful. By centralizing all content in a single `data.ts` file, we've created a "single source of truth" that makes the entire platform exceptionally easy to update, maintain, and scale.
+Teachers in K-12 are drowning in administrative work; students are stuck in one-size-fits-all curricula; administrators have no real-time view of school health. The standard SaaS edtech response is to ship more dashboards, more cloud, more vendor lock-in — none of which addresses the core problem: there's no time, and there's no privacy.
 
-## 🚀 Project Overview
+Sovereign School OS rebuilds the classroom around AI under three hard constraints:
 
-This website demonstrates modern web development practices using React, TypeScript, and Tailwind CSS to create an elegant, responsive documentation platform. It features a clean architecture with component-based design and client-side routing to deliver a smooth user experience.
+1. **Zero server-side logic.** The entire app runs in the user's browser. No cloud database. No backend.
+2. **localStorage as the database.** All sensitive data lives in the user's browser, FERPA-compliant by construction.
+3. **One source of truth per portal.** Students, teachers, and administrators each get a bespoke AI co-pilot — not the same chatbot with different prompts.
 
-## 👥 Team & Credits
+Winner of the **Tsinghua AIID Yearly Competition** in partnership with NetDragon.
 
-This project was a collaborative effort by the members of the **AI-Explorers** learning circle.
+---
 
--   **EL AKKAD SAMI**: Creator of S.S.O.
-    -   **Linkedin**: [SAMI-ELAKKAD](https://www.linkedin.com/in/sami-el-akkad-萨米-361296188/)
-    -   **GitHub**: [ELAKKAD-SAMI](https://github.com/SAMI-ELAKKAD)
-    -   **Email**: [elakkadsami00@gmail.com](mailto:elakkadsami00@gmail.com)
--   **CHUTIRAT SAENGYINGYONGWATTANA**: Creator of Miscellaneous Tutor
--   **Camellia Yip**: Founder of Ask Smart
+## Three portals, three workflows
 
-## 🏗️ Website Structure
+### Student Portal — adaptive learning universe
+Students pick a historical or cultural "Hero" as their AI mentor. The Hero adapts narrative based on real-time performance: struggling students get gentler reteaching; advanced students get harder variants. Pipeline parses AI text responses into interactive React widgets (multiple choice, fill-in-the-blank, math input) directly in the chat stream.
 
-### Main Sections
+### Teacher Portal — content factory
+The "5-Minute Lesson Plan" generator takes a topic + grade level and emits a complete plan with rubric, slides, worksheets, and an interactive adventure. The "Adventure Architect" turns any standard into a stateful, prefetching game-loop with adaptive narrative branching. The AI Coach surfaces patterns from incident logs for proactive intervention.
 
--   🏠 **Home**: Introduction and overview of our hackathon mission and projects.
--   👥 **Team**: Profiles of our team members and their roles.
--   🤖 **Projects**: Detailed pages for each of our three hackathon projects.
-    -   **Sovereign School OS (S.S.O.)**: A gamified AI learning OS that crafts personalized adventures for students and generates instant, game-based presentations for teachers.
-    -   **Miscellaneous Tutor**: An AI-powered educational chatbot that uses the DeepSeek API to generate interactive HTML lessons and quizzes on any topic, right in your chat window.
-    -   **Ask Smart**: An AI-powered communication coach for ROKID glasses that provides real-time, subtle guidance to help you navigate high-pressure conversations.
--   📡 **Communication**: A showcase of our promotional efforts, social media presence, and community feedback.
--   **Journal**: Our developer logs, sharing challenges and breakthroughs.
--   **Progress**: A timeline view of our development progress across all projects.
--   **Glossary**: Definitions of key technical terms we used.
--   **Tutorial**: A live "Vibe Coding" playground to demonstrate rapid AI-powered prototyping.
+### Administration Portal — equity holodeck
+A conversational AI Copilot for transforming raw school data into actionable insights ("Generate a fairness report by demographic across the last 6 months"). Equity Dashboard proactively identifies bias in grading distribution. Support Hub flags at-risk students before crisis.
 
-## 🛠️ Technology Stack
+---
 
-### Frontend
-
--   **React**: A JavaScript library for building user interfaces.
--   **TypeScript**: Provides static typing to enhance code quality and maintainability.
--   **Tailwind CSS**: A utility-first CSS framework used via CDN for rapid UI development.
--   **React Router**: For client-side routing and navigation.
--   **Framer Motion**: For creating fluid animations and transitions.
--   **@google/genai**: The Google Gemini API SDK for powering all generative AI features.
-
-## 🏛️ Project Architecture
-
-### Directory Structure
-
-Our project is organized to be clean, scalable, and easy to navigate. Here's a breakdown of the key files and folders:
+## Architecture
 
 ```
-.
-├── components/       # Reusable React components
-│   ├── Header.tsx    # Site-wide navigation bar
-│   ├── Footer.tsx    # Site-wide footer
-│   ├── TeamMemberCard.tsx # Displays individual team member profiles
-│   └── ...           # Other shared components (Icons, Modals, etc.)
-├── pages/            # Top-level page components for each route
-│   ├── HomePage.tsx  # The main landing page
-│   ├── ProjectPage.tsx # Template for individual project showcases
-│   └── ...           # All other pages (Team, Tutorial, etc.)
-├── App.tsx           # Main application component. Manages routing, theme, and layout.
-├── data.ts           # The "single source of truth". All text, project details, team bios, etc., are stored here for easy updates without touching component logic.
-├── types.ts          # Centralizes all TypeScript type definitions, ensuring data consistency across the app.
-├── index.html        # The main HTML file that serves as the entry point for the web application.
-├── index.tsx         # The root of our React application. It renders the `App` component into the DOM.
-└── metadata.json     # Contains application metadata for the hosting environment.
+Browser (single-page app, React 19 + TypeScript + Vite)
+  ├── /components       — UI layer, portal-segmented
+  │   ├── /student      — student-portal-specific components
+  │   ├── /teacher      — teacher-portal-specific components
+  │   ├── /administration — admin-portal-specific components
+  │   ├── /common       — reusable presentation components
+  │   └── /icons        — SVG icon library
+  ├── /services         — "client-side backend" / ORM-like layer
+  │   ├── geminiService.ts        — single LLM API interface
+  │   ├── studentDataService.ts   — student CRUD against localStorage
+  │   ├── lessonService.ts        — lesson plan persistence
+  │   └── …                       — 12 more domain services
+  ├── /hooks            — reusable React hooks (e.g. useRecorder)
+  └── /utils            — pure helper functions (parsers, etc.)
+
+localStorage
+  ├── students[]        — profile, performance, incidents
+  ├── lessons[]         — plans, kits, versions
+  ├── conversations[]   — chatbot history per portal
+  └── …                 — all persistent state
 ```
 
-### Key Patterns
+**Architectural principles:**
+1. Zero server-side logic
+2. localStorage is the database (no IndexedDB, no Firestore, no cloud)
+3. Components never read localStorage directly — always through a service
+4. Single point of contact for all AI calls (geminiService.ts)
 
--   **Centralized Data**: All content (project details, team bios, etc.) is managed in `data.ts` for easy updates.
--   **Component-First Architecture**: The UI is broken down into small, reusable components.
--   **Type Safety**: Full TypeScript implementation ensures robust and error-free code.
--   **Responsive Design**: Mobile-first styling ensures a great experience on all devices.
+---
 
-## 📱 Responsive Design
+## Technical highlights
 
-The website is fully responsive across all device sizes:
+### Adaptive Hero persona
+Adaptive difficulty: before each prompt, the client computes the student's performance level (Struggling / Average / Advanced) and injects a sub-prompt that guides explanation complexity. The Hero stays in character ("Cleopatra explaining the Pythagorean theorem") via system prompt enforcement.
 
--   **Desktop**: Full-featured layout with hover effects and animations.
--   **Tablet**: Optimized navigation and content layout.
--   **Mobile**: Touch-friendly interface with a collapsible navigation menu.
+### Interactive widget parser
+A purpose-built parsable markup language (`[MULTIPLE_CHOICE:Question|Correct|Wrong]`, `[FILL_IN_BLANK:Sentence with {answer}]`) lets the LLM embed comprehension-check widgets directly in its response. The interactiveParser parses the markup and renders real interactive React components inline in the chat.
 
-## 🎨 Design System
+### Structured lesson generation
+Lesson plans are generated as strict typed JSON via `responseSchema` — a schema mirroring the TypeScript `LessonPlan` interface forces the model to return data as reliable as a REST endpoint.
 
-### Visual Identity
+### Adventure Architect: stateful game loop
+The Adventure Architect runs a prefetching, stateful game loop: while the student is on stage N, the next stage is being generated in the background based on their stage-N performance. The prefetch result waits in state until the student clicks "Next," then becomes the current stage and triggers the next prefetch. Adaptive narrative without perceived latency.
 
--   **Color Palette**: A modern dark theme with cyan, fuchsia, and amber as primary accent colors, creating an energetic, futuristic feel.
--   **Typography**: Clean, modern fonts (Inter) with excellent readability.
--   **Spacing**: A consistent spacing system for visual harmony.
--   **Interactions**: Smooth transitions and hover effects powered by Framer Motion.
+### Deeper reasoning with thinkingConfig
+For features requiring complex pedagogical reasoning (AI Coach for professional development), `thinkingConfig` with maximum thinking budget is enabled — the model uses more internal tokens for reasoning before generating, producing more thoughtful in-depth answers.
 
-## 🚀 Deployment
+---
 
-This project is built as a static website, making it easy to deploy on any platform that supports static hosting (e.g., Zeabur, Vercel, Netlify, GitHub Pages). Simply serve the contents of the directory.
+## Privacy model
 
-## 🤝 Contributing
+**Student data never leaves the browser.** Profiles, incidents, performance — all client-side only. Prompts to the LLM are constructed client-side; no central server sees student PII.
 
-This project serves as a template for hackathon documentation websites. When contributing or adapting:
+**Implications:**
+- Data is tied to a specific device/browser. Clearing the cache deletes everything.
+- No cross-device sync in this architecture (deliberate trade-off for privacy).
+- FERPA-compliant by construction. No vendor processor agreements needed.
 
--   Follow the established component patterns.
--   Maintain type safety with TypeScript.
--   Update `data.ts` with your own project and team information.
--   Test responsive design across devices.
+---
 
-## 📄 License
+## Tech stack
 
-This project is open source and available under the MIT License.
+| Layer | Choice |
+|---|---|
+| Framework | React 19.1.1 + TypeScript ~5.9.3 + Vite 7.1.7 |
+| Styling | Tailwind CSS |
+| Document generation | jspdf, jszip, pdf.js (in-browser, no server upload) |
+| AI reasoning | Frontier multimodal LLM (text, image, video, audio) |
+| Image generation | In-browser API call |
+| Video generation | Async generation with prefetch pipeline |
+| Audio | Transcription + text-to-speech |
 
-## 🙏 Acknowledgments
+---
 
--   **AIID Hackathon 2025**: Organizers, mentors, and participants.
--   **Google Gemini Team**: For providing the powerful generative AI models and API.
--   **React & Framer Motion Teams**: For the excellent frontend libraries.
+## Codebase structure
+
+See `STRUCTURE.md` for the complete file tree (170+ files across 6 portal directories).
+
+---
+
+## Testing strategy
+
+- **Unit** (vitest/jest): pure utilities like `interactiveParser.ts`, services with mocked localStorage.
+- **Component** (React Testing Library): UI flows with the LLM service mocked — never real API calls in tests.
+- **E2E** (Cypress/Playwright): network interception to stub the LLM endpoint. Multi-step adaptive-narrative flows tested with predefined responses for speed and determinism.
+
+---
+
+## What's hard about this
+
+Three things this project taught me:
+
+1. **Browser-only storage is a feature, not a limitation.** Once you commit to localStorage as the source of truth, you stop needing auth, cloud sync, GDPR data processing agreements, or backend ops. The privacy guarantee is structural, not promised.
+
+2. **The LLM is a constrained component, not a god-mode controller.** Every model call routes through a service, every output is parsed for structure, every fallback is explicit. Resilience comes from architecture, not from "the model will figure it out."
+
+3. **Adaptive UX is a prefetching problem.** The AdventureGame.tsx pattern — always be generating the next node in the background — is what makes 5-second LLM latency feel like sub-second UX.
+
+---
+
+## License
+
+MIT for code. Documentation CC-BY-4.0.
+
+---
+
+**Sami EL AKKAD** — Tsinghua AIID · sam25@mails.tsinghua.edu.cn · Built in collaboration with NetDragon for the Tsinghua AIID Yearly Competition 2025.
