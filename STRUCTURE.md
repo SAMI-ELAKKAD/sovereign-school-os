@@ -1,146 +1,49 @@
 # Project Directory Structure
 
-This document outlines the complete file and directory structure for the Sovereign School OS application.
+> Directory layout for the AI-Explorers AIID Hackathon 2025 documentation website.
 
 ```
-/
-├── App.tsx
-├── README.md
-├── components/
-│   ├── administration/
-│   │   ├── AICopilotView.tsx
-│   │   ├── AdminDashboardView.tsx
-│   │   ├── AdministrationPortal.tsx
-│   │   ├── ApprovalsView.tsx
-│   │   ├── CommunicationsView.tsx
-│   │   ├── ComplianceLogView.tsx
-│   │   ├── DeleteUserConfirmationModal.tsx
-│   │   ├── FairnessDashboardView.tsx
-│   │   ├── SchoolArchiveView.tsx
-│   │   ├── StaffOverviewView.tsx
-│   │   ├── StudentSupportView.tsx
-│   │   ├── UserManagementView.tsx
-│   │   └── UserModal.tsx
-│   ├── common/
-│   │   ├── Button.tsx
-│   │   ├── CalendarView.tsx
-│   │   ├── Chatbot.tsx
-│   │   ├── Input.tsx
-│   │   ├── MarkdownRenderer.tsx
-│   │   └── Select.tsx
-│   ├── icons/
-│   │   ├── SettingsIcon.tsx
-│   │   └── StudentIcons.tsx
-│   ├── student/
-│   │   ├── AICoderView.tsx
-│   │   ├── AITeacherView.tsx
-│   │   ├── AdaptiveLearningPathView.tsx
-│   │   ├── AdventuresView.tsx
-│   │   ├── ArtStudioView.tsx
-│   │   ├── AssignmentsAndQuizzesView.tsx
-│   │   ├── AssignmentsView.tsx
-│   │   ├── ClassSummariesView.tsx
-│   │   ├── DebateCoachView.tsx
-│   │   ├── EngineeringSandboxView.tsx
-│   │   ├── FinancialLiteracyView.tsx
-│   │   ├── FocusModeBanner.tsx
-│   │   ├── GraphingCalculator.tsx
-│   │   ├── HistoryExplorerView.tsx
-│   │   ├── LearningHubView.tsx
-│   │   ├── LearningJournalView.tsx
-│   │   ├── LiteratureCompanionView.tsx
-│   │   ├── MathSolverView.tsx
-│   │   ├── MusicComposerView.tsx
-│   │   ├── ProfileSettingsView.tsx
-│   │   ├── ProgressView.tsx
-│   │   ├── QuestsView.tsx
-│   │   ├── QuizResultView.tsx
-│   │   ├── QuizView.tsx
-│   │   ├── ReflectionView.tsx
-│   │   ├── ScienceLabView.tsx
-│   │   ├── StoriesView.tsx
-│   │   ├── StudentDashboardView.tsx
-│   │   ├── StudentHeader.tsx
-│   │   ├── StudentLessonDisplay.tsx
-│   │   ├── StudentPortal.tsx
-│   │   └── interactive/
-│   │       └── InteractiveWidgets.tsx
-│   ├── teacher/
-│   │   ├── AICoachView.tsx
-│   │   ├── AstraForTeachers.tsx
-│   │   ├── AdventureArchitectView.tsx
-│   │   ├── AttentionGauge.tsx
-│   │   ├── ClassRoster.tsx
-│   │   ├── CommunicationsView.tsx
-│   │   ├── CourseSummaryView.tsx
-│   │   ├── DashboardView.tsx
-│   │   ├── FlashcardModal.tsx
-│   │   ├── IEPCopilotView.tsx
-│   │   ├── ImageEditor.tsx
-│   │   ├── ImageGenerator.tsx
-│   │   ├── IncidentModal.tsx
-│   │   ├── IncidentsView.tsx
-│   │   ├── LessonPlannerView.tsx
-│   │   ├── LessonVideoGenerator.tsx
-│   │   ├── MyLibraryView.tsx
-│   │   ├── QuizGenerator.tsx
-│   │   ├── SmartSuggestionModal.tsx
-│   │   ├── StudentDashboardView.tsx
-│   │   ├── TeacherPortal.tsx
-│   │   ├── VideoGenerator.tsx
-│   │   └── VideoPromptGenerator.tsx
-│   ├── Chip.tsx
-│   ├── ClassRoster.tsx
-│   ├── CommunicationsView.tsx
-│   ├── GenerationOutput.tsx
-│   ├── IEPCopilotView.tsx
-│   ├── IncidentsView.tsx
-│   ├── LessonPlannerView.tsx
-│   ├── MainApp.tsx
-│   ├── Onboarding.tsx
-│   ├── SettingsModal.tsx
-│   ├── SmartSuggestionModal.tsx
-│   ├── StoryGeneratorView.tsx
-│   ├── StudentDashboardView.tsx
-│   └── TeacherPortal.tsx
-├── hooks/
-│   ├── useRecorder.ts
-│   └── useUserProfile.ts
-├── index.html
-├── index.tsx
-├── metadata.json
-├── services/
-│   ├── approvalService.ts
-│   ├── archiveService.ts
-│   ├── calendarService.ts
-│   ├── chatHistoryService.ts
-│   ├── communicationService.ts
-│   ├── complianceLogService.ts
-│   ├── courseSummaryService.ts
-│   ├── focusService.ts
-│   ├── geminiService.ts
-│   ├── heroData.ts
-│   ├── lessonService.ts
-│   ├── lessonTemplateService.ts
-│   ├── lessonVersionService.ts
-│   ├── priorityService.ts
-│   └── studentDataService.ts
-├── types.ts
-└── utils/
-    ├── interactiveParser.ts
-    ├── parser.ts
-    ├── pdfParser.ts
-    └── video.ts
+.
+├── components/        # Reusable React components
+│   ├── Header.tsx     # Site-wide navigation bar
+│   ├── Footer.tsx     # Site-wide footer
+│   ├── TeamMemberCard.tsx  # Individual team member profile cards
+│   └── ...            # Other shared components (Icons, Modals, command palette, etc.)
+├── pages/             # Top-level page components for each route
+│   ├── HomePage.tsx   # Main landing page
+│   ├── ProjectPage.tsx     # Template for individual project showcases
+│   ├── TeamPage.tsx
+│   ├── TutorialPage.tsx    # Live Vibe Coding playground
+│   ├── JournalPage.tsx     # Developer logs
+│   ├── ProgressPage.tsx    # Timeline view of development progress
+│   ├── GlossaryPage.tsx
+│   └── CommunicationPage.tsx
+├── App.tsx            # Main application component (routing, theme, layout)
+├── data.ts            # Single source of truth: all text, project details, team bios
+├── types.ts           # Centralized TypeScript type definitions
+├── index.html         # HTML entry point
+├── index.tsx          # React app root
+├── metadata.json      # Hosting metadata
+├── package.json       # Dependencies and scripts
+├── tsconfig.json      # TypeScript compiler configuration
+├── vite.config.ts     # Vite bundler configuration
+├── README.md          # Project overview (this repo)
+└── STRUCTURE.md       # This file
 ```
 
 ## Layer overview
 
-- components/administration/ : Admin portal views, including user management, fairness dashboards, approvals, compliance audit log, and the conversational AI co-pilot.
-- components/teacher/ : Teacher portal: the 5-Minute Lesson Planner, Adventure Architect, Image/Video generators, attention gauge, IEP co-pilot, incident logging.
-- components/student/ : Student portal: adaptive learning paths, AI tutors, science lab, math solver, art studio, music composer, debate coach, quests, reflection.
-- components/common/ : Buttons, inputs, selects, calendar, markdown renderer, chatbot shell shared across portals.
-- services/ : Browser-side service layer. localStorage-backed. No network I/O outside the AI text/image/video calls.
-- utils/ : Parsing helpers for interactive widgets, lesson markdown, PDF ingestion, and video metadata.
-- hooks/ : React hooks for audio recording and the user profile (role gate).
+- **components/** : Reusable UI primitives. Header, Footer, TeamMemberCard, modals, command palette, icon set. Each component is self-contained and consumes data via props.
+- **pages/** : Route-level views. Each page composes components and pulls its content from `data.ts`. No business logic lives here.
+- **App.tsx** : Routing, theme, and layout shell. Reads route params and renders the corresponding page.
+- **data.ts** : The single source of truth. To update a project description, team bio, or tutorial step, edit this file - no component logic needs to change. This pattern is what makes the site "exceptionally easy to update, maintain, and scale" (see README).
+- **types.ts** : Shared TypeScript types - `Project`, `TeamMember`, `JournalEntry`, etc.
 
-For the architecture rationale and product positioning, see [README.md](./README.md).
+## Architectural decisions
+
+1. **Single source of truth (`data.ts`).** Content and presentation are deliberately separated. Anyone on the team can update content without touching React.
+2. **Static-first deployment.** The site builds to plain HTML/JS for hosting on Zeabur, Vercel, Netlify, or GitHub Pages. The current production deployment runs on Google Cloud Run.
+3. **Animation as content.** Framer Motion is treated as part of the documentation, not decoration - constellation backgrounds, 3D-tilt cards, and the clickable architecture diagram are how complex ideas get communicated.
+4. **Keyboard-driven navigation.** Command palette (Cmd/Ctrl + K) is first-class, not an afterthought.
+
+For the full project overview, see [README.md](./README.md). For the solo Sovereign School OS source archive, see [SSO-final](https://github.com/SAMI-ELAKKAD/SSO-final).
