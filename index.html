@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AIID Hackathon Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --color-bg-deep: #02040a;
+        --color-bg: #0a0a0f;
+        --color-text: #e0e0e0;
+        --color-primary: #06b6d4; /* cyan-500 */
+        --color-secondary: #d946ef; /* fuchsia-500 */
+        --color-accent: #f59e0b; /* amber-500 */
+        --glass-bg: rgba(10, 10, 15, 0.5);
+        --glass-border: rgba(56, 189, 248, 0.15);
+        --text-glow-cyan: 0 0 5px rgba(34, 211, 238, 0.5), 0 0 10px rgba(34, 211, 238, 0.3);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        /* The body's own background must be transparent to see elements with negative z-index */
+        background-color: transparent;
+        color: var(--color-text);
+        overflow-x: hidden;
+      }
+      
+      #page-background {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        z-index: -12;
+        background-color: var(--color-bg-deep);
+        /* Starfield background image */
+        background-image:
+          radial-gradient(circle, rgba(255, 255, 255, 0.7) 1px, transparent 1.1px),
+          radial-gradient(circle, rgba(255, 255, 255, 0.5) 0.8px, transparent 0.9px);
+        background-repeat: repeat;
+        background-size: 
+          150px 150px, /* Larger, sparser stars */
+          70px 70px;   /* Smaller, denser stars */
+        background-position: 0 0;
+        animation: move-stars 200s linear infinite;
+      }
+      
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        z-index: -11;
+        background: radial-gradient(ellipse at 70% 30%, rgba(192, 38, 211, 0.1), transparent 50%),
+                    radial-gradient(ellipse at 30% 70%, rgba(6, 182, 212, 0.1), transparent 50%);
+        animation: subtle-drift 25s infinite alternate;
+      }
+
+      #cursor-spotlight {
+        position: fixed;
+        top: var(--cursor-y, 50%);
+        left: var(--cursor-x, 50%);
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(6, 182, 212, 0.35), rgba(192, 38, 211, 0.15) 40%, transparent 70%);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        /* z-index must be higher than canvas and aurora but lower than content */
+        z-index: -1;
+        transition: top 0.2s ease-out, left 0.2s ease-out;
+      }
+
+      @keyframes move-stars {
+        from { background-position: 0 0; }
+        to { background-position: -10000px 5000px; }
+      }
+
+      @keyframes subtle-drift {
+        from { opacity: 0.8; transform: scale(1) translate(0, 0); }
+        to { opacity: 1; transform: scale(1.05) translate(20px, -20px); }
+      }
+
+      @keyframes gradient-flow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      
+      @keyframes globe-gradient-flow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      #background-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -10;
+        display: block;
+        opacity: 0.7;
+      }
+      
+      .glass-card {
+        background: var(--glass-bg);
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+        border: 1px solid var(--glass-border);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+      }
+
+      .interactive-card {
+        transform-style: preserve-3d;
+        overflow: hidden; /* Contain the inner glow */
+      }
+      
+      .interactive-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(6, 182, 212, 0.2),
+            transparent 80%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease-out;
+        z-index: 0; /* Render behind content within the card */
+      }
+
+      .interactive-card:hover::before {
+          opacity: 1;
+      }
+      
+      .interactive-card:hover {
+        border-color: rgba(56, 189, 248, 0.5);
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 15px var(--color-primary), 0 0 45px var(--color-secondary);
+      }
+      
+      h1, h2, h3, h4, .gradient-text {
+        background-image: linear-gradient(90deg, var(--color-text) 70%, var(--color-primary));
+        background-size: 100%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        -webkit-text-fill-color: transparent; 
+        -moz-text-fill-color: transparent;
+        text-shadow: var(--text-glow-cyan);
+      }
+      
+      h1, h2 {
+          font-weight: 900;
+      }
+      
+      h3, h4 {
+          font-weight: 700;
+      }
+
+      .highlight-keyword {
+        font-weight: 700;
+        font-size: 1.1em;
+        padding: 0.1em 0.2em;
+        border-radius: 0.2em;
+      }
+
+      .highlight-keyword-primary {
+        color: var(--color-primary); /* cyan */
+        text-shadow: 0 0 6px rgba(6, 182, 212, 0.7);
+        background-color: rgba(6, 182, 212, 0.15);
+      }
+
+      .highlight-keyword-secondary {
+        color: var(--color-secondary); /* fuchsia */
+        text-shadow: 0 0 6px rgba(217, 70, 239, 0.7);
+        background-color: rgba(217, 70, 239, 0.15);
+      }
+      
+      .highlight-keyword-accent {
+        color: var(--color-accent); /* amber */
+        text-shadow: 0 0 6px rgba(245, 158, 11, 0.7);
+        background-color: rgba(245, 158, 11, 0.15);
+      }
+
+      .glow-on-hover {
+          transition: text-shadow 0.3s ease-out;
+      }
+      .glow-on-hover:hover {
+          text-shadow: 0 0 8px rgba(6, 182, 212, 0.8);
+      }
+
+      @keyframes section-glow-pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
+        }
+        50% {
+          box-shadow: 0 0 30px 5px rgba(6, 182, 212, 0.4);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
+        }
+      }
+
+      .section-highlight {
+        animation: section-glow-pulse 2s ease-out;
+        border-radius: 1rem; /* Match the card radius for a contained glow */
+      }
+      
+      .section-hover-highlight {
+        box-shadow: 0 0 35px 7px rgba(6, 182, 212, 0.3);
+        border-radius: 1rem; /* Match the card radius for a contained glow */
+      }
+
+      .dark {
+        /* This class is no longer needed for theme switching but kept for compatibility */
+      }
+      
+      /* Styles for Ask Smart Project Page */
+      .ask-smart-hero {
+          position: relative;
+          overflow: hidden;
+      }
+
+      .ask-smart-hero::before { /* HUD Grid overlay */
+          content: '';
+          position: absolute;
+          top: 0; left: 0;
+          width: 200%; height: 200%;
+          background-image:
+              linear-gradient(rgba(0, 180, 220, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0, 180, 220, 0.1) 1px, transparent 1px);
+          background-size: 50px 50px;
+          animation: move-grid 30s linear infinite;
+          z-index: 1;
+      }
+
+      @keyframes move-grid {
+          from { transform: translate(0, 0); }
+          to { transform: translate(-50%, -50%); }
+      }
+
+      .hud-element {
+          border: 1px solid rgba(0, 220, 255, 0.3);
+          background: rgba(0, 50, 70, 0.1);
+          backdrop-filter: blur(3px);
+          animation: hud-flicker 5s infinite alternate;
+          box-shadow: inset 0 0 10px rgba(0, 220, 255, 0.2);
+      }
+      @keyframes hud-flicker {
+          0%, 100% { opacity: 0.8; border-color: rgba(0, 220, 255, 0.3); }
+          50% { opacity: 0.95; border-color: rgba(0, 220, 255, 0.5); }
+      }
+
+      /* Styles for Miscellaneous Tutor Project Page */
+      .miscellaneous-tutor-hero {
+          position: relative;
+          overflow: hidden;
+      }
+
+      .miscellaneous-tutor-hero::before { /* Scanlines */
+          content: '';
+          position: absolute;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
+          background-image: linear-gradient(rgba(0, 200, 255, 0.07) 50%, transparent 50%);
+          background-size: 100% 4px;
+          animation: scanlines 10s linear infinite;
+          pointer-events: none;
+          z-index: 1;
+      }
+      
+      .miscellaneous-tutor-hero::after { /* Binary code */
+          content: '01011010 01101000 01100001 01101110 01100111 01010001 01101001';
+          position: absolute;
+          bottom: 10px; right: 10px;
+          font-family: monospace;
+          color: rgba(0, 200, 255, 0.1);
+          font-size: 10px;
+          pointer-events: none;
+          z-index: 1;
+      }
+
+      @keyframes scanlines {
+          from { background-position: 0 0; }
+          to { background-position: 0 40px; }
+      }
+
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.5",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^11.3.18"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="page-background"></div>
+    <div id="cursor-spotlight"></div>
+    <canvas id="background-canvas"></canvas>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
